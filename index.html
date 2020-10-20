@@ -189,7 +189,54 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-  
+        function style_Saludp_2_0() {
+            return {
+                pane: 'pane_Saludp_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,182,54,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Saludp_2');
+        map.getPane('pane_Saludp_2').style.zIndex = 402;
+        map.getPane('pane_Saludp_2').style['mix-blend-mode'] = 'normal';
+        var layer_Saludp_2 = new L.geoJson(json_Saludp_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Saludp_2',
+            layerName: 'layer_Saludp_2',
+            pane: 'pane_Saludp_2',
+            onEachFeature: pop_Saludp_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Saludp_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Saludp_2);
+        map.addLayer(layer_Saludp_2);
+        function pop_Corregimientos_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id_correg'] !== null ? autolinker.link(feature.properties['id_correg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['corregimie'] !== null ? autolinker.link(feature.properties['corregimie'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
         function style_Corregimientos_3_0() {
             return {
                 pane: 'pane_Corregimientos_3',
